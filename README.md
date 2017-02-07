@@ -38,11 +38,6 @@ Attributes
 See attributes/default.rb for default values.
 
 default['vsearch']['version']
-default['vsearch']['tar']
-default['vsearch']['url']
-default['vsearch']['filename']
-default['vsearch']['install_path']
-default['vsearch']['dir']
 
 License and Authors
 ===================
