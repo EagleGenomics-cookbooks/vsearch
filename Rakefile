@@ -17,8 +17,11 @@ rescue LoadError
   puts '>>>>> Kitchen gem not loaded, omitting tasks' unless ENV['CI']
 end
 
+desc 'Run all pre-convergence test: rubocop, foodcritic, rspec'
 task tests: [:rubocop, :foodcritic, :rspec]
 
+desc 'Run kitchen: includes destroy, converge, verify - default: all'
 task kitchen: [:all]
 
+desc 'Run both test and converge'
 task default: [:tests, :kitchen]
