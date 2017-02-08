@@ -1,0 +1,43 @@
+
+sudo: required
+dist: trusty
+
+# install the pre-release chef-dk.  Use chef-stable-trusty to install the stable release
+addons:
+  apt:
+    sources:
+      - chef-stable-trusty
+    packages:
+      - chefdk
+
+# Don't `bundle install` which takes about 1.5 mins
+install: echo "skip bundle install"
+
+branches:
+  only:
+    - master
+
+services: docker
+
+env:
+  global:
+    # Ignore warnings when running specs.
+    - RUBYOPT="-W0"
+  matrix:
+    - CHEF_VERSION=current INSTANCE=default-ubuntu-1404
+    - CHEF_VERSION=current INSTANCE=default-centos-7
+
+before_script:
+  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables -N DOCKER )
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+
+script: KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+
+matrix:
+  include:
+    - before_script:
+      - /opt/chefdk/bin/chef exec rake tests
+      env: CHEF_VERSION=12.17.44 UNIT_AND_LINT=1
+    - script:
+      - /opt/chefdk/bin/chef exec rake kitchen
+      env: CHEF_VERSION=12.17.44 UNIT_AND_LINT=1
