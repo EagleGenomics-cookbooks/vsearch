@@ -33,7 +33,12 @@ end
 
 # packages to allow support for gzip and bzip2 compressed input files
 package 'zlib-devel' do
-  action :install
+  case node[:platform]
+  when 'centos'
+    package_name 'zlib-devel'
+  when 'ubuntu'
+    package_name 'zlib1g-dev'
+  end
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{node['vsearch']['tar']}" do
