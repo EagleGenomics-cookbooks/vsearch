@@ -19,10 +19,21 @@
 include_recipe 'apt' if platform_family?('debian')
 include_recipe 'build-essential'
 
+# files required for testing
+cookbook_file '/tmp/reads.gz' do
+  source 'temp.gz'
+  action :create
+end
+
 %w(tar autoconf automake).each do |pkg|
   package pkg do
     action :install
   end
+end
+
+# packages to allow support for gzip and bzip2 compressed input files
+package 'zlib-devel' do
+  action :install
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{node['vsearch']['tar']}" do
