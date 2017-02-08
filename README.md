@@ -20,7 +20,7 @@ To test and converge the recipe, we make use of a Rakefile. By running `chef exe
 
 ```
 chef exec rake all                          # Alias for kitchen:all
-chef exec rake default                      # Run both test and converge
+chef exec rake default                      # Run both tests, kitchen converge and verify
 chef exec rake foodcritic                   # Lint Chef cookbooks
 chef exec rake kitchen                      # Run kitchen: includes destroy, converge, verify - default: all
 chef exec rake kitchen:all                  # Run all test instances

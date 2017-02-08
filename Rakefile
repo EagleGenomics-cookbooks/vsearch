@@ -23,5 +23,5 @@ task tests: [:rubocop, :foodcritic, :rspec]
 desc 'Run kitchen: includes destroy, converge, verify - default: all'
 task kitchen: [:all]
 
-desc 'Run both test and converge'
+desc 'Run both tests, kitchen converge and verify'
 task default: [:tests, :kitchen]
