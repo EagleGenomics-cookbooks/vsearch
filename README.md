@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/EagleGenomics-cookbooks/vsearch.svg?branch=master)](https://travis-ci.org/EagleGenomics-cookbooks/vsearch)
+
 # vsearch
 
 ## Description
