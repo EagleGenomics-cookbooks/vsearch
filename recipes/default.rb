@@ -33,7 +33,7 @@ end
 
 # packages to allow support for gzip and bzip2 compressed input files
 package 'zlib-devel' do
-  case node[:platform]
+  case node['platform']
   when 'centos'
     package_name 'zlib-devel'
   when 'ubuntu'
