@@ -1,6 +1,6 @@
 TOKEN=$1
 USER=$2
-COOKBOOK=$3
+REPO=$3
 PRIVATE=$4
 
 body='{
@@ -16,6 +16,7 @@ else
   url='api.travis-ci.org'
 fi
 
+echo "$url"
 
 curl -s -X POST \
   -H "Content-Type: application/json" \
@@ -23,7 +24,7 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token ${TOKEN}" \
   -d "$body" \
-  https:/${url}/repo/${USER}%2F${COOKBOOK}/requests \
+  https:/${url}/repo/${USER}%2F${REPO}/requests \
   | tee /tmp/travis-request-output.$$.txt
 
 if grep -q '"@type": "error"' /tmp/travis-request-output.$$.txt; then
