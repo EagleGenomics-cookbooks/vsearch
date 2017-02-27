@@ -1,7 +1,5 @@
 TOKEN=$1
 
-echo "TOKEN=$TOKEN"
-
 body='{
 "request": {
   "branch":"master",
