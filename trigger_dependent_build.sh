@@ -16,7 +16,7 @@ else
   url='api.travis-ci.org'
 fi
 
-echo "$url"
+echo "https:/${url}/repo/${USER}%2F${REPO}/requests"
 
 curl -s -X POST \
   -H "Content-Type: application/json" \
