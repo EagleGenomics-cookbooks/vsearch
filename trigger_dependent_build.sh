@@ -9,7 +9,8 @@ body='{
   "message": "Triggered build"
 }}'
 
-if $PRIVATE=='private'; then
+if [ "$PRIVATE" == "private" ]
+then
   url='api.travis-ci.com'
 else
   url='api.travis-ci.org'
