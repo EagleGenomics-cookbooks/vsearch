@@ -27,7 +27,7 @@ before_script:
 script:
 - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 - chmod +x trigger_dependent_build.sh
-- ./trigger_dependent_build.sh $TRAVIS_ACCESS_TOKEN EagleGenomics-cookbooks vsearch_runnable private
+- ./trigger_dependent_build.sh ${TRAVIS_ACCESS_TOKEN} EagleGenomics-cookbooks vsearch_runnable private
 
 notifications:
   slack:
