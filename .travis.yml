@@ -27,6 +27,7 @@ before_script:
     -N DOCKER )
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   - chef gem install kitchen-docker
+  - chef gem install travis
   - "/opt/chefdk/bin/chef exec rake tests"
 
 script:
