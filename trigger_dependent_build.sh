@@ -1,9 +1,20 @@
 TOKEN=$1
+USER=$2
+COOKBOOK=$3
+PRIVATE=$4
+
 body='{
 "request": {
   "branch":"master",
-  "message": "test"
+  "message": "Triggered build"
 }}'
+
+if $PRIVATE=='private'; then
+  url='api.travis-ci.com'
+else
+  url='api.travis-ci.org'
+fi
+
 
 curl -s -X POST \
   -H "Content-Type: application/json" \
@@ -11,7 +22,7 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token ${TOKEN}" \
   -d "$body" \
-  https://api.travis-ci.com/repo/EagleGenomics-cookbooks%2Fvsearch_runnable/requests \
+  https:/${url}/repo/${USER}%2F${COOKBOOK}/requests \
   | tee /tmp/travis-request-output.$$.txt
 
 if grep -q '"@type": "error"' /tmp/travis-request-output.$$.txt; then
