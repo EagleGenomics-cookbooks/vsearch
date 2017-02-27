@@ -25,11 +25,7 @@ curl -s -X POST \
   "https:/$url/repo/$USER%2F$REPO/requests" \
   | tee /tmp/travis-request-output.$$.txt
 
-test = '-d "$body" \
-"https:/$url/repo/$USER%2F$REPO/requests" \
-| tee /tmp/travis-request-output.$$.txt'
-
-echo $test
+echo "https:/$url/repo/$USER%2F$REPO/requests"
 
 if grep -q '"@type": "error"' /tmp/travis-request-output.$$.txt; then
  cat /tmp/travis-request-output.$$.txt

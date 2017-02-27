@@ -28,7 +28,6 @@ script:
 after_script:
 - chmod +x trigger_dependent_build.sh
 - ./trigger_dependent_build.sh EagleGenomics-cookbooks vsearch_runnable private $TRAVIS_ACCESS_TOKEN
-# - ./trigger_dependent_build.sh $TRAVIS_ACCESS_TOKEN
 
 notifications:
   slack:
