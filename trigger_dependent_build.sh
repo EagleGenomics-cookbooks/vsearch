@@ -22,9 +22,14 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token ${TOKEN}" \
   -d "$body" \
-  https:/${url}/repo/${USER}%2F${REPO}/requests \
+  "https:/$url/repo/$USER%2F$REPO/requests" \
   | tee /tmp/travis-request-output.$$.txt
 
+test = '-d "$body" \
+"https:/$url/repo/$USER%2F$REPO/requests" \
+| tee /tmp/travis-request-output.$$.txt'
+
+echo $test
 
 if grep -q '"@type": "error"' /tmp/travis-request-output.$$.txt; then
  cat /tmp/travis-request-output.$$.txt
