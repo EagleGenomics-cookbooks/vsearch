@@ -3,6 +3,9 @@ USER=$2
 COOKBOOK=$3
 PRIVATE=$4
 
+echo $USER
+echo $COOKBOOK
+
 body='{
 "request": {
   "branch":"master",
