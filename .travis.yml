@@ -19,7 +19,7 @@ env:
   global:
     - RUBYOPT="-W0"
   matrix:
-    - CHEF_VERSION=current INSTANCE=default-ubuntu-1404
+    # - CHEF_VERSION=current INSTANCE=default-ubuntu-1404
     - CHEF_VERSION=current INSTANCE=default-centos-7
 
 before_script:
@@ -31,6 +31,7 @@ before_script:
 
 script:
   - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+  - chmod +x trigger_dependent_build.sh
   - ./trigger_dependent_build.sh
 
 notifications:
