@@ -1,3 +1,4 @@
+$(travis login)
 TOKEN=$(travis token --org)
 
 echo "TOKEN=$TOKEN"
