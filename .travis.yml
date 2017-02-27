@@ -14,7 +14,7 @@ services: docker
 env:
   global:
   - RUBYOPT="-W0"
-  - secure: IEW5/1mveWDiWUsNn6aXguXBLSchBZWjdzYYE3Dj+mf/YwQAOAw+t1pUstfaGz+QjQQP5Yzc2TcFpe5S6WloWqkq4v/Eef+j4akXFemvgFL+/hvjTXRwZytz9j+YmEnaED43bzFZ9finwn7QTDuo3uShqeXgbKLce1FOZsjmIIL9Epn1R0MlqsjliokfKe5BHo8vdUcLbgjMD2UhLpPYLXocx4eA/tb7PvpMo0bm0rRdKN82v2BYnBFNQ9LN+iBVNLLpQCtmrd/P70t+REqz/hkzFHdsRhh2Rb9yzcJOitOvCLH6rD6CV1l3tzdSUMuCCiWSPA/HVvUxZpLneZxLdpdvvWMXIFJPSOdsDLj9JzIkSV+0J23HCGQHSoFnbz6uVdLyXT3IUW4Sc6VriWDhVcDDIyXL+hU3zUcIEio9edO/n9NiWTVzff331et8vWuSTJO1yju1Z2ITgbAfBqGmTIYxDvHUn9eL30E8A2isCbPQQ/0fFAAKZBANmCHsWLsElSq574bu0PWQIryQ+THJktiB3RZlCdI33D41lGLMio5RVg+Y+AiURKXrPJBfkAGJMDMlEkD16HyaKDwzkZWNe5TTth8OZHLGDWLcrJw71TQ+3mSWnRe7PrDHiPl31PSC5y1fyl+wv+mGOKCGdvKsxzNbmcHX9Yh1c9p0Jk6Q6sU=
+  - secure: AvVk3IKYMzgUfOJUemFCzUapu4S9h4mNJnkM0maRnCJ2Fe7Gp88b1gm0rbkXlIhba4ly/2t1ix0ArmHM+hil0KprEhZRkzzfmVaIwcRdgKvKBEJsEQez/Avppvan32VB1S6nmES/sX6qnbTVtDfKLHo04I08VMIg7yaV97slQXZUyXYLquY8/9u6zQxPZ7kgR/3f/5EoKxzG1kGktheJ3BtfSQfBvG6vkIc0nc04dOqrI3uv4R4Ui3T3ji9G0X0noFG3cQu9G85o25rfShvV3OY/Wub6McWdK6/5f+JZqRm3BL2AMEG/QfHU1vcZK77Vms1mrCtEJhF1qEF6t4Adgay6lU8i7gYJyYXvBVblQTukvGFjnvDQR6Aaz4EZ+lBBQQH2YJbXiH+KG/J2dV4a4Gyrm1LVTx+Cu+xqNcnBQDdaC+SQv6D1KirCHqvWSMnunjBSk/jwZwFyI3DRW8ics2SvJ7F/tKHaGTuzbfMCr9zUiKLhusypp36TS914lAWv1iS9EoIBZUHHEb0bvFl59a7ljNpJV18P+oiRuwpt7TtP9+Sc/ZbLJkzeQDekDfzrh7IssYA3WX33YsaGsO9oQn/0SsZ3S7Ky142EUV9zJyQBVbnNeTt0c4afbkckAXjYmKCmE7/uXQKu/PWwaEKnAk5AVvUlFMa/Ttr8qup2sjo=
   matrix:
   - CHEF_VERSION=current INSTANCE=default-centos-7
 before_script:
@@ -26,6 +26,7 @@ before_script:
 - "/opt/chefdk/bin/chef exec rake tests"
 script:
 - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+after-script:
 - chmod +x trigger_dependent_build.sh
 - "./trigger_dependent_build.sh $TRAVIS_ACCESS_TOKEN"
 notifications:
