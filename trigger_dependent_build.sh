@@ -1,5 +1,4 @@
 TOKEN=$1
-
 body='{
 "request": {
   "branch":"master",
@@ -12,7 +11,7 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token ${TOKEN}" \
   -d "$body" \
-  https://api.travis-ci.org/repo/EagleGenomics-cookbooks%2Fvsearch_runnable/requests \
+  https://api.travis-ci.com/repo/eagletravis_ci%2Fvsearch_runnable/requests \
   | tee /tmp/travis-request-output.$$.txt
 
 if grep -q '"@type": "error"' /tmp/travis-request-output.$$.txt; then
