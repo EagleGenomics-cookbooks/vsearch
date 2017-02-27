@@ -1,6 +1,5 @@
 sudo: required
 dist: trusty
-
 addons:
   apt:
     sources:
@@ -8,32 +7,27 @@ addons:
     packages:
     - chefdk
 install: echo "skip bundle install"
-
 branches:
   only:
   - master
-
 services: docker
-
 env:
   global:
-    - RUBYOPT="-W0"
+  - RUBYOPT="-W0"
+  - secure: KoPqY52lOYzfmTMS1K01FKajOhZJThdrdNUnAPTE/HOb49OevQggyPQCijoQXfbYh/NHymqGlSlhIEL2Ai4nGZSLwwwn16ws6j08ssh03kACKYTUWLeKeoe3ySQTQRtcxx1MrLLDOtT80jwEk7o4FE/wKjI5WZKFGV4Swo6n1CFLX1HmiN3a1S8tRu8RKhhGZk2JHzKqY9BK6Hbl5cCylYbsVLItLAX4ylYxRlldfG1WAEALyteTYuxmycDzV4g4zkMN2lB2xTj5rj/plS1RsJ7n4crq32Jl23goQQih48snYgByGev6bygh6qrV+czGl4dPqc3t9APHjyinid6FNKj9MmM4flmprwK+2bRYMO5Xoxm7JdKSqT/kmRO9qpATG3xZcOlYOKYI6+Un8q0dab/UpMJR/5p2XEq6Qg8Zj6e/VBXOj7rB6OTuonBcSWYsIgC/T/4VZHUMNDavIHo1qFV1JEKVEMktHeerlwX54MBS8d6M5PadohZNN9OWHQY+1+nWyZoE686Nt+eotuVggE4gzg7gZsJ7HoFQ9VumBg+hPIwkkkJmIivtE/5WrMLmOpH8LLxJborxU0JjATPUn4Cw236QU1q9ogzC636UhVs5KMzU9LtTqD9F0DvJzIhI0zP3KwiovMJvNhRi3GT27IXKYcGa2kPw7iPqFAwO5h8=
   matrix:
-    # - CHEF_VERSION=current INSTANCE=default-ubuntu-1404
-    - CHEF_VERSION=current INSTANCE=default-centos-7
-
+  - CHEF_VERSION=current INSTANCE=default-centos-7
 before_script:
-  - sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables
-    -N DOCKER )
-  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
-  - chef gem install kitchen-docker
-  - chef gem install travis
-  - "/opt/chefdk/bin/chef exec rake tests"
-
+- sudo iptables -L DOCKER || ( echo "DOCKER iptables chain missing" ; sudo iptables
+  -N DOCKER )
+- eval "$(/opt/chefdk/bin/chef shell-init bash)"
+- chef gem install kitchen-docker
+- chef gem install travis
+- "/opt/chefdk/bin/chef exec rake tests"
 script:
-  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
-  - chmod +x trigger_dependent_build.sh
-  - ./trigger_dependent_build.sh
+- KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+- chmod +x trigger_dependent_build.sh
+- ./trigger_dependent_build.sh $TRAVIS_ACCESS_TOKEN
 
 notifications:
   slack:
