@@ -1,7 +1,7 @@
 TOKEN=$1
-USER=$2
-REPO=$3
-PRIVATE=$4
+# USER=$2
+# REPO=$3
+# PRIVATE=$4
 
 body='{
 "request": {
@@ -24,8 +24,10 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token ${TOKEN}" \
   -d "$body" \
-  https:/${url}/repo/${USER}%2F${REPO}/requests \
+  https://api.travis-ci.com/repo/EagleGenomics-cookbooks%2Fvsearch_runnable/requests \
   | tee /tmp/travis-request-output.$$.txt
+
+# https:/${url}/repo/${USER}%2F${REPO}/requests \
 
 if grep -q '"@type": "error"' /tmp/travis-request-output.$$.txt; then
  cat /tmp/travis-request-output.$$.txt

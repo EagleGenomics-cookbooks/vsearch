@@ -22,13 +22,13 @@ before_script:
   -N DOCKER )
 - eval "$(/opt/chefdk/bin/chef shell-init bash)"
 - chef gem install kitchen-docker
-- chef gem install travis
 - "/opt/chefdk/bin/chef exec rake tests"
 script:
-# - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
+- KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 after_script:
 - chmod +x trigger_dependent_build.sh
-- ./trigger_dependent_build.sh $TRAVIS_ACCESS_TOKEN EagleGenomics-cookbooks vsearch_runnable private
+# - ./trigger_dependent_build.sh $TRAVIS_ACCESS_TOKEN EagleGenomics-cookbooks vsearch_runnable private
+- ./trigger_dependent_build.sh $TRAVIS_ACCESS_TOKEN
 
 notifications:
   slack:
