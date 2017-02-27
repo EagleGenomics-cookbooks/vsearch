@@ -32,6 +32,9 @@ before_script:
 script:
   - KITCHEN_LOCAL_YAML=.kitchen.docker.yml /opt/chefdk/embedded/bin/kitchen verify ${INSTANCE}
 
+after_success:
+  - ./trigger-dependent-build.sh
+
 notifications:
   slack:
     secure: FudhlsDwP/+EsLY7CkX7P3317rJaE4SoUxVElr35KkPHhyYe/oT4yMJXYWzse6pwE8xN02O60yTxeCEltSoYabrfxocsP/A2a1P96Jx60n/Axm3TWJ9J1Wh8+y0P1dSo1yxj0DqbvWOeAYoGMtrt+YvxWMbsq3kEsgw5hzCX0dEokAz6DNKbPirfynEupbnARWpnaFWpU7293QGV4M8PZiltidH33dJrS26hAUtehlKwoDZlU8bxYKAABg2PAGNGcHATUnaaJQ8p24bbZwQzB7Y0OoSeU4fD4Oc1KtVfEbC7LkT7IubZ85vz+ZAVay4R7mh6QzqjOkZiI/iEFc3++JP9FsY9Xk2bgX3zIFFYGP+s5HfZx2c4ko6CytrmHKFajqoHMepiKwtcqz5Plr6DBSPEPpjjlOlLK42S8QZA/pUwrAP7FevC7PCBuplX80DPueNccf+diNAj6Yw/0veyXm8XYx2VwwjPRCTzshBvR/XYDU2s5p/RcWUTuxeYYnzTXqdAGoYI/vNmbcvHScNLdBy/K8fxNwlYntvr4DXf10qD1X4EOWe62rwle+AlzL9y2HF/3A55IlA4k6tu+J1pgNzeAdAvb86tnvmV6aPpKqgOXopOP/Cgy/aby21baJdTbYMYi9Qcsza/8/ziReXhvZpmIMrLiG8HVLnhwGUeNMc=
