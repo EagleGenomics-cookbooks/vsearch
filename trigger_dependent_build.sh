@@ -22,4 +22,5 @@ curl -s -X POST \
   -H "Travis-API-Version: 3" \
   -H "Authorization: token ${TOKEN}" \
   -d "$body" \
-  "https:/${url}/repo/${USER}%2F${REPO}/requests"
+  https://$url/repo/$USER%2F$REPO/requests \
+  | tee /tmp/travis-request-output.$$.txt
