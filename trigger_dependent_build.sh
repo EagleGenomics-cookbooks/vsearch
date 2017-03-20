@@ -6,7 +6,7 @@ TOKEN=$4
 body='{
 "request": {
   "branch":"master",
-  "message": "Triggered build"
+  "message": "Triggered build - vsearch dependency"
 }}'
 
 if [ "$ACCESS" == "private" ]
